@@ -1,0 +1,5 @@
+BASE_URL = "https://"
+USERNAME = ""
+PASSWORD = ""
+BOT_TOKEN = ""
+CHANNEL_ID = ""
