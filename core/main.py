@@ -2,7 +2,7 @@ import requests
 import time
 from datetime import datetime
 
-from api.converter import  Item
+from api.converter import Item
 
 from .services import (
     generate_dict_of_alarms,
@@ -37,11 +37,11 @@ def send_message():
             "text": (
                 "🔴\n"
                 f"<b>Level:</b> {alarm.iAlarmLevel}\n"
+                f"<b>Type:</b> {alarm.svMoc}\n"
+                f"<b>Object:</b> {alarm.urnByName}\n"
                 f"<b>Name:</b> {alarm.svAlarmName}\n"
                 f"<b>Info:</b> {alarm.svAdditionalInfo}\n"
                 f"<b>Cause:</b> {alarm.svAlarmCause}\n"
-                f"<b>Type:</b> {alarm.svMoc}\n"
-                f"<b>Object:</b> {alarm.urnByName}\n"
                 f"<b>Time:</b> {datetime.fromtimestamp(int(alarm.dtOccurTime)//1000)}\n"
             ),
             "parse_mode": "html",
@@ -66,10 +66,10 @@ def send_message():
             "text": (
                 "🟢\n"
                 f"<b>Resolved:</b> {alarm.svAlarmName}\n"
-                f"<b>Info:</b> {alarm.svAdditionalInfo}\n"
-                f"<b>Cause:</b> {alarm.svAlarmCause}\n"
                 f"<b>Type:</b> {alarm.svMoc}\n"
                 f"<b>Object:</b> {alarm.urnByName}\n"
+                f"<b>Info:</b> {alarm.svAdditionalInfo}\n"
+                f"<b>Cause:</b> {alarm.svAlarmCause}\n"
                 f"<b>Time:</b> {datetime.fromtimestamp(int(alarm.dtOccurTime)//1000)}\n"
             ),
             "parse_mode": "html",
@@ -80,5 +80,3 @@ def send_message():
         )
     alarms_in_db.update(generate_dict_of_alarms(alarms=new_alarms))
     save_object(alarms_in_db)
-
-
