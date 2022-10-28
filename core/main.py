@@ -9,7 +9,7 @@ from .services import (
     save_object,
     load_object_from_db,
     separate_resolved_alarms,
-    seperate_new_alarms,
+    separate_new_alarms,
 )
 from .selectors import get_all_incoming_alarms
 
@@ -24,7 +24,7 @@ def send_message():
     except:
         save_object(incoming_alarms)
         alarms_in_db = load_object_from_db()
-    new_alarms = seperate_new_alarms(
+    new_alarms = separate_new_alarms(
         alarms_in_db=alarms_in_db, incoming_alarms=incoming_alarms
     )
     resolved_alarms = separate_resolved_alarms(

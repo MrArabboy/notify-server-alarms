@@ -28,10 +28,13 @@ def load_object_from_db() -> object:
 
 
 def generate_dict_of_alarms(*, alarms: list) -> dict:
-    return {alarm.iSyncNo: alarm for alarm in alarms}
+    return {
+        alarm.iSyncNo: alarm for alarm in alarms if alarm.svMoc != "vms"
+    }  # temporary ignore vms
 
 
-def seperate_new_alarms(*, alarms_in_db: dict, incoming_alarms: dict) -> list:
+# alarms_in_db and incoming_alarms like: {alarm_id: alarm_obj, ...}
+def separate_new_alarms(*, alarms_in_db: dict, incoming_alarms: dict) -> list:
     new_alarm_IDs = set(incoming_alarms).difference(set(alarms_in_db))
     return [incoming_alarms.get(ID) for ID in new_alarm_IDs]
 
