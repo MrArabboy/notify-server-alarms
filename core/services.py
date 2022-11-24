@@ -29,7 +29,9 @@ def load_object_from_db() -> object:
 
 def generate_dict_of_alarms(*, alarms: list) -> dict:
     return {
-        alarm.iSyncNo: alarm for alarm in alarms if alarm.svMoc != "vms"
+        alarm.iSyncNo: alarm
+        for alarm in alarms
+        if alarm.svMoc != "vms" and alarm.urnByName != "E9K_B9_1_MCNA02"
     }  # temporary ignore vms
 
 
